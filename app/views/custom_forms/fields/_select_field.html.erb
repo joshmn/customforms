@@ -1,0 +1,40 @@
+<%= f.input :placeholder, as: :string %>
+<div data-controller="custom-form--select-field">
+  <div class="d-flex justify-content-between">
+    <h5>Options</h5>
+    <span class="link" data-action="click->custom-form--select-field#add">Add new</span>
+  </div>
+  <script type="text/html" data-custom-form--select-field-target="template">
+    <div class="row mb-2" data-custom-form--select-field-target="pendingRow">
+      <div class="col-4">
+        <input type="text" class="form-control" name="field[collection][$id][key]" placeholder="Label" />
+      </div>
+      <div class="col-4">
+        <input type="text" class="form-control" name="field[collection][$id][value]" placeholder="Value" />
+      </div>
+      <div class="col-2">
+        <a data-action="click->custom-form--select-field#remove">Remove</a>
+      </div>
+    </div>
+  </script>
+  <div data-custom-form--select-field-target="container">
+    <% if form.object.errors.include?(:collection) %>
+      <div class="alert alert-danger"><%= form.object.errors[:collection].to_sentence %></div>
+    <% end %>
+
+    <% form.object.collection.each do |pair| %>
+      <div class="row" data-custom-form--select-field-target="pendingRow">
+        <% id = SecureRandom.hex %>
+        <div class="col-4">
+          <input type="text" class="form-control" name="field[collection][<%= id %>][key]" placeholder="Label"  value="<%= pair['key'] %>"/>
+        </div>
+        <div class="col-4">
+          <input type="text" class="form-control" name="field[collection][<%= id %>][value]" placeholder="Value" value="<%= pair['value'] %>" />
+        </div>
+        <div class="col-2">
+          <a data-action="click->custom-form--select-field#remove">Remove</a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

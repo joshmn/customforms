@@ -1,0 +1,15 @@
+<%= simple_form_for field_form, url: custom_form_fields_path(custom_form) do |f| %>
+  <%= f.error_notification(message: field_form.errors.try(:to_sentence)) %>
+  <%= f.input :type, as: :select, collection: field_form.type_options, input_html: { onchange: "window.location.href = `${window.location.pathname}?type=` + this.value"} %>
+  <%= f.input :label %>
+  <%= f.input :required, as: :boolean, include_blank: false %>
+  <% if field_form.type %>
+    <%= f.simple_fields_for :options do |ff| %>
+      <%= render "custom_forms/fields/#{field_form.type.constantize.model_name.element}", f: ff, form: f %>
+    <% end %>
+  <% end %>
+
+  <% if field_form.type %>
+    <%= f.submit %>
+  <% end %>
+<% end %>

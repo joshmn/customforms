@@ -1,0 +1,7 @@
+<ul id="sortable-list" data-controller="sortable">
+  <% custom_form.fields.each do |field| %>
+    <li data-sortable-update-url="<%= url_for custom_form_field_path(custom_form, field) %>">
+      <i class="bi-grip-horizontal"></i> <%= field.label %>  (<%= link_to "X", custom_form_field_path(custom_form, field), data: { turbo_confirm: "U sure?", turbo_method: :delete }  %>)
+    </li>
+  <% end %>
+</ul>

@@ -1,0 +1,20 @@
+<h2>Responses</h2>
+<%= link_to "new", new_custom_form_response_path(@custom_form) %>
+<ul>
+  <% @custom_form.responses.each do |resp| %>
+  <li><%=link_to resp.uuid, custom_form_response_path(@custom_form, resp) %></li>
+  <% end %>
+</ul>
+<h2>Fields</h2>
+<%= turbo_frame_tag :fields do  %>
+  <%= render 'custom_forms/fields', custom_form: @custom_form %>
+<% end %>
+
+<h3>Add new field</h3>
+
+<div class="card w-50 card-body">
+  <%= turbo_frame_tag :new_field do %>
+    <%= render 'custom_forms/fields/form', custom_form: @custom_form, field_form: @field_form %>
+  <% end %>
+
+</div>

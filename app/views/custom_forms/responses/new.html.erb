@@ -1,0 +1,7 @@
+<%= simple_form_for @builder, url: custom_form_responses_path(@custom_form) do |f| %>
+  <% @builder.attributes.keys.each do |attr| %>
+    <%= build_field(attr, f) %>
+  <% end %>
+
+  <%= f.submit %>
+<% end %>

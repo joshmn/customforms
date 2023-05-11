@@ -1,0 +1,10 @@
+<ul>
+  <% @response.attributes.each do |key, value| %>
+    <li>
+      <ul>
+        <li><strong><%= key %></strong></li>
+        <li><%= value %></li>
+      </ul>
+    </li>
+  <% end %>
+</ul>
